@@ -249,13 +249,18 @@ git branch -M main
 git push -u origin main
 ```
 
-⚠️ 第二条 `git branch -M main` 别漏——GitHub 现在默认分支名叫 `main`，你本机默认叫 `master`，不改名会推送失败。
+⚠️ 第二条 `git branch -M main` 别漏——GitHub 现在的默认分支名叫 `main`，老版本 git 默认叫 `master`，名字对不上会推送失败。
+（本机当前分支**已经是 `main`**，所以这条其实是空跑，但留着无害。）
 把上面命令里的「你的用户名」换成第 1 步注册的那个，别留中文。
+
+> 2026-10-01 实测状态：本地 8 条提交、31 个待推送文件、共 1.9 MB，`data/` 不在其中（正确）。
+> 超详细逐步图解见 `答辩准备/04_GitHub详细步骤.md`（含注册、建仓、推送、令牌、报错速查、图形界面备选路线）。
 
 ### 第 4 步：确认成功了
 
-- 终端会显示一堆 `+(27) ...` 的进度条，最后一行是 `master -> main`。
-- 浏览器刷新你的仓库页面，能看到 **26 个文件 + 1 个文件夹**（`code/ figures/ results/ overleaf/`，**`data/` 不在里面，这是对的**）。
+- 终端会显示一堆 `+(31) ...` 的进度条，最后一行是 `main -> main`。
+- 浏览器刷新你的仓库页面，能看到 **31 个文件**（`code/ figures/ results/ overleaf/ 答辩准备/`，外加 `README.md`、`run_all.py`、定稿 PDF），
+  提交数显示 **8 Commits**、作者为 **徐敏纯**；**`data/` 不在里面，这是对的**。
 - ⚠️ 如果弹框要登录：用刚注册的账号密码登；
   **但如果报错 "support for password authentication was removed"**，说明要用令牌：
   GitHub 网站 → 右上角头像 → **Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token (classic)**
