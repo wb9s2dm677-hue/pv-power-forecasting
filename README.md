@@ -174,12 +174,18 @@ python run_all.py
 1. 打开 https://www.overleaf.com 注册/登录（用邮箱就行，免费账号够用）。
 2. 点 **New Project → Upload Project**，把 `overleaf/` 里的 **`main.tex` + `refs.bib`** 上传。
 3. **把 `figures/` 整个文件夹也拖进同一层**（不然报告里 3 张图会显示成红方框，正常现象，不用慌）。
-4. 点左上 **Menu → Compiler 改成 XeLaTeX**（中文必须用这个，默认的 pdflatex 会报"未定义控制序列"）。
+4. 点**左下角小齿轮 ⚙**（文件树最底下、「?」旁边那个）→ 里面 **Compiler 改成 XeLaTeX**
+   （中文必须用这个，默认的 pdflatex 会报"未定义控制序列"）。
+   备选入口：点顶部**标题右边那个小 ▾**，菜单里也有 Compiler。（老教程写的"左上角 Menu"在新版界面里已经没有了）
 5. 点 **Recompile**，预览就在右边出来了。
 
 当前报告共引用 7 张图（fig1~fig7），**figures/ 整个文件夹必须一起传**，否则图全变红方框。**fig7** 是第 5b 步"温度/云量消融"的对称图（左边温度效应柱图、右边消融 MAE 对比），`main.tex` 里已经预留好 `\includegraphics` 的位置。
 
+⚠️ **Safari 下直接拖「整个文件夹」进浏览器经常失败**，最稳的做法是**打包成 zip 再传**：把 `main.tex`、`refs.bib`、`figures/` 三样放在同一个临时文件夹里（前两个必须与该文件夹**平铺**、不能嵌套在 `overleaf/` 下），右键 →「压缩」，然后点 **Create a new project → Existing project (.zip)** 上传该 zip。
+上传后 `main.tex` 应在项目根目录、`figures/` 与其同级，`\graphicspath{{./figures/}{../figures/}}` 才能找到图。
+
 改哪里最常见：正文在 `main.tex` 里改；图换名字就改 `\includegraphics{}` 括号里的文件名。
+免费版够用：**单人使用完全没问题**；需要别人协作编辑才要升级。答辩前记得在 **Share → Project access 改成 Public**，否则老师打不开链接（改回 Private 也可以，随时可切）。
 
 ## 9. 运行环境（版本写进报告才严谨）
 
@@ -199,10 +205,23 @@ python run_all.py
 ### 第 1 步：注册 GitHub 账号
 
 1. 浏览器打开 <https://github.com> → 点右上角 **Sign up**。
+   > ⚠️ **要用你自己电脑的浏览器（Chrome / Safari）**，不要用任何"内置预览面板"——
+   > 那种面板跑不了网页脚本，会白屏并显示 `Please enable JS and disable any ad blocker`，看着像断网其实是面板的问题。
+   > 判断方法：命令行跑 `curl -sS -o /dev/null -w "%{http_code}" https://github.com/`，返回 `200` 就说明网络没问题。
 2. **用户名只能用英文字母、数字、短横线 `-`，不能写中文**，比如 `xuminchun2026`。
    记下来，后面三步都要用它。这个用户名 = 你的仓库地址前缀，改不了。
 3. 密码要 **12 个字符以上**（GitHub 现在的最短密码长度，短了会直接不让注册）。
 4. 注册完去邮箱 **点激活链接**（邮箱 1037899152@qq.com），不点后面会卡住。
+5. ⚠️ **万一页面白屏只显示 `Please enable JS and disable any ad blocker`，或提示"请求太多次"，这不是你电脑坏了**，
+   是 GitHub 的**防刷限流**：同一个网络短时间内注册页请求太多会被临时拉黑（限流按网络出口计，即按 IP 算）。
+   应对（按顺序）：
+   - **立刻停止点击**，每点一次计数 +1，冷却越拖越久；
+   - 等 **30~60 分钟**，期间不要碰；
+   - **换网络出口**：手机在 WiFi 和 4G/5G 之间切换（等于换个 IP，限流计数通常重置），然后**只点一次**，一次填完。
+   - 别误判成"浏览器禁了 JavaScript"——判断方法：`curl -sS -o /dev/null -w "%{http_code}" https://github.com/`
+     返回 `200` 即网络正常，白屏与浏览器无关。
+   > 补一句：本地仓库里的代码、图、结果一直在 `~/Desktop/电气club作业/.git` 里存着，**晚几天推上 GitHub 也不会丢**。
+   > 上传只是最后 30 秒的事，注册卡住不影响继续做别的。
 
 ### 第 2 步：在 GitHub 上建一个空仓库
 

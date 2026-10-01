@@ -17,3 +17,6 @@ data/
 #  Large 文件兜底
 *.xlsx
 *.xls
+
+#  Upload 到 Overleaf 用的临时压缩包（main.tex + refs.bib + figures/）
+*.zip
