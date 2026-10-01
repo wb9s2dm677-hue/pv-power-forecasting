@@ -1,0 +1,7 @@
+# 运行环境：Python 3.14.6（Anaconda base）
+# 安装：pip install -r requirements.txt
+numpy>=2.0
+pandas>=2.0
+scikit-learn>=1.5
+matplotlib>=3.8
+openpyxl>=3.1

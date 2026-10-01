@@ -1,0 +1,19 @@
+# PyCharm / IDE
+.idea/
+*.iml
+.DS_Store
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 虚拟环境（如果用 conda venv 建过）
+venv/
+.venv/
+
+# 数据（3.2 MB 的 xlsx + 原有 Kaggle CSV，不进 git，见 README 说明）
+data/
+
+#  Large 文件兜底
+*.xlsx
+*.xls
