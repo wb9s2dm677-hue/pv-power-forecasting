@@ -1,7 +1,8 @@
 # 单座光伏电站 15 分钟级功率预测：基线对比与机器学习方法评估
 
 > 西华大学电气 Club 学术组 2026 年招新 · 方向 A（光伏功率预测）
-> ⚠️ 作者姓名 / 学号 / 提交邮箱：提交前填写（命名格式：`姓名_学号_方向A`）
+> **作者：徐敏纯　学号：3120260807425　邮箱：1037899152@qq.com**
+> 答辩日期：2026-10-14（暂定）｜初版归档：2026-10-01，交付清单见第 12 节
 
 ---
 
@@ -148,8 +149,8 @@ MAE / RMSE 越小越好，R² 越大越好。
 ├── run_all.py                一键跑通全部
 ├── requirements.txt
 └── overleaf/                 报告 LaTeX 源文件（Overleaf）
-    ├── main.tex             报告正文骨架（章节已排好，填空即可）
-    └── refs.bib             参考文献（BibTeX，DOI 需自查）
+    ├── main.tex             报告正文（已完稿，213 行，编译为 7 页 PDF）
+    └── refs.bib             参考文献 BibTeX（正文引用 5 条，含数据集 DOI 条目）
 ```
 
 ## 7. 怎么复现（别人拿到代码三步跑通）
@@ -173,16 +174,22 @@ python run_all.py
 
 1. 打开 https://www.overleaf.com 注册/登录（用邮箱就行，免费账号够用）。
 2. 点 **New Project → Upload Project**，把 `overleaf/` 里的 **`main.tex` + `refs.bib`** 上传。
-3. **把 `figures/` 整个文件夹也拖进同一层**（不然报告里 3 张图会显示成红方框，正常现象，不用慌）。
+3. **把 `figures/` 整个文件夹也拖进同一层**（不然正文用到的 4 张图会显示成红方框，正常现象，不用慌）。
 4. 点**左下角小齿轮 ⚙**（文件树最底下、「?」旁边那个）→ 里面 **Compiler 改成 XeLaTeX**
    （中文必须用这个，默认的 pdflatex 会报"未定义控制序列"）。
    备选入口：点顶部**标题右边那个小 ▾**，菜单里也有 Compiler。（老教程写的"左上角 Menu"在新版界面里已经没有了）
 5. 点 **Recompile**，预览就在右边出来了。
 
-当前报告共引用 7 张图（fig1~fig7），**figures/ 整个文件夹必须一起传**，否则图全变红方框。**fig7** 是第 5b 步"温度/云量消融"的对称图（左边温度效应柱图、右边消融 MAE 对比），`main.tex` 里已经预留好 `\includegraphics` 的位置。
+当前正文实际引用 **4 张图**——`fig1_typical_day`（典型日曲线）、`fig5_weather_scenarios`（天气分场景）、`fig6_feature_importance`（特征重要性）、`fig7_ablation_temp_cloud`（温度消融），所以 **`figures/` 整个文件夹必须一起传**，否则图全变红方框。`figures/` 里的 fig2~fig4 是过程图（日最大出力、功率-辐射散点、相关矩阵），**未选入正文**，保留在仓库里备查。
 
-⚠️ **Safari 下直接拖「整个文件夹」进浏览器经常失败**，最稳的做法是**打包成 zip 再传**：把 `main.tex`、`refs.bib`、`figures/` 三样放在同一个临时文件夹里（前两个必须与该文件夹**平铺**、不能嵌套在 `overleaf/` 下），右键 →「压缩」，然后点 **Create a new project → Existing project (.zip)** 上传该 zip。
+⚠️ **Safari 下直接拖「整个文件夹」进浏览器经常失败**，最稳的做法是**打包成 zip 再传**：把 `main.tex`、`refs.bib`、`figures/` 三样放在同一个临时文件夹里（前两个必须与该文件夹**平铺**、不能嵌套在 `overleaf/` 下），右键 →「压缩」，然后点绿色 **`New project` 旁边的小三角 ▾ → 第三行 `Existing project (.zip)`** 上传该 zip。
 上传后 `main.tex` 应在项目根目录、`figures/` 与其同级，`\graphicspath{{./figures/}{../figures/}}` 才能找到图。
+
+> ⚠️ **三条 2026-10-01 实测踩坑结论（新版界面）**
+> 1. `File ▾` 菜单里**只有 `Upload file`、没有 `Upload project`**；前者是单文件上传，**不会覆盖整份项目**。要覆盖就走上面的 zip 流程。
+> 2. 传完必查：`main.tex` 第 4 行应为 `\documentclass[11pt,a4paper]{ctexart}`。还是旧的 `lipt` 就说明**没覆盖成功**。
+> 3. 弹窗里**必须选 Existing project**。选成 New project 会生成一个标题带 `(1)` 后缀的**副本项目**，而副本的编译器会退回默认 pdflatex，编译报 `CTeX fontset 'fandol' is unavailable`——此时在副本里 ⚙ 改回 XeLaTeX 即可恢复。
+> 4. 页面顶部那条白底「拖拽至此上传」横条**不是 Overleaf 的**，是浏览器里装的百度网盘插件，别照它操作。
 
 改哪里最常见：正文在 `main.tex` 里改；图换名字就改 `\includegraphics{}` 括号里的文件名。
 免费版够用：**单人使用完全没问题**；需要别人协作编辑才要升级。答辩前记得在 **Share → Project access 改成 Public**，否则老师打不开链接（改回 Private 也可以，随时可切）。
@@ -274,3 +281,21 @@ git push
 | 中文文件名显示成乱码 | 终端编码 | 不影响，网页上看是正常的 |
 
 （提交前按题目要求补充 2 篇，候选清单见 `参考文献候选清单.md`，均经公开检索核实存在，DOI 需自行在出版商页面二次确认）
+
+## 12. 交付清单（2026-10-01 初版归档状态）
+
+| 交付物 | 位置 | 说明 |
+|---|---|---|
+| **报告 PDF（初版定稿）** | `光伏功率预测_徐敏纯_3120260807425.pdf` | 7 页：摘要 / 引言 / 数据与方法 / 结果与分析（5 小节）/ 结论 / 参考文献 |
+| LaTeX 源码 | `overleaf/main.tex` + `overleaf/refs.bib` | 引擎 **XeLaTeX**，编译 0 错误 |
+| 报告用到的图 | `figures/fig1_typical_day.png`、`fig5_weather_scenarios.png`、`fig6_feature_importance.png`、`fig7_ablation_temp_cloud.png` | 其余 fig2~fig4 为过程图，未入正文 |
+| 可复现代码 | `code/check_env.py`、`01`~`05` | `python run_all.py` 一键跑通全部 |
+| 结果数据 | `results/metrics_*.csv` | 正文里**每一个数字**都来自这里，没有手填 |
+| 答辩准备材料 | `答辩准备/01_答辩速记卡.md`、`02_今天定稿清单.md`、`03_改这五句话填空表.md` | |
+
+> ⚠️ `data/`（含 35040 行原始数据）**不进版本库**，也不随 GitHub 分发；复现者按第 3 节 DOI 自行下载。
+
+**截至 2026-10-01 仍未闭环的两件事**（都不阻塞答辩，属于加分项）：
+
+1. **GitHub 仓库尚未建立**（`git remote` 为空，代码只在本地 `.git` 里）→ 见第 11 节，需要换手机热点注册后才能推。
+2. **目标列是否为实测计量值**，尚未拿到数据提供方书面答复 → 报告中已如实写成「待核实」，**在拿到答复前不要改这段**。
